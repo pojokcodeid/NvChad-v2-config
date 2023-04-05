@@ -19,7 +19,8 @@ opt.cmdheight = 0
 require "custom.configs.format_onsave"
 
 local lpath = vim.fn.stdpath "config" .. "/lua/custom/my-snippets"
-vim.g.luasnippets_path = lpath
+vim.g.vscode_snippets_path = lpath
+vim.g.snipmate_snippets_path = lpath
 
 -- autocmd("VimEnter",{
 --   pattern="*",
