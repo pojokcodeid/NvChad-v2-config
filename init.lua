@@ -7,22 +7,24 @@ autocmd("VimResized", {
 })
 
 autocmd("VimEnter", {
-   pattern = "*",
-   callback = function()
-      vim.opt.statusline = "%#normal# "
-   end,
+  pattern = "*",
+  callback = function()
+    vim.opt.statusline = "%#normal# "
+  end,
 })
 
 local opt = vim.opt
 opt.cmdheight = 0
 
-require("custom.configs.format_onsave")
+require "custom.configs.format_onsave"
+
+local lpath = vim.fn.stdpath "config" .. "/lua/custom/my-snippets"
+vim.g.luasnippets_path = lpath
 
 -- autocmd("VimEnter",{
 --   pattern="*",
 --   command="Nvdash",
 -- })
-
 
 -- autocmd("WinEnter", {
 --    pattern = "*",
@@ -34,5 +36,3 @@ require("custom.configs.format_onsave")
 --       end
 --    end,
 -- })
-
-
