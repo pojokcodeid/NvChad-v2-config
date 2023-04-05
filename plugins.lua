@@ -198,6 +198,65 @@ local plugins = {
 			require("custom.configs.whichkey")
 		end,
 	},
+  -- override lsp 
+  -- for install lsp tidak support mason
+	{ "williamboman/nvim-lsp-installer", event = "VeryLazy", lazy = true },
+  {
+		"neovim/nvim-lspconfig",
+		event = "VeryLazy",
+		dependencies = {
+			"williamboman/mason-lspconfig.nvim",
+		},
+		config = function()
+			require("custom.configs.lsp")
+		end,
+	},
+  -- for formater linter
+	{ "RRethy/vim-illuminate", event = "BufRead", lazy = true },
+	{
+		"jayp0521/mason-null-ls.nvim",
+		lazy = true,
+		dependencies = "jose-elias-alvarez/null-ls.nvim",
+		event = "BufRead",
+		opts = function()
+			require("custom.configs.mason-null-ls")
+		end,
+	},
+  -- for popup input
+	{
+		"stevearc/dressing.nvim",
+		lazy = true,
+		init = function()
+			---@diagnostic disable-next-line: duplicate-set-field
+			vim.ui.select = function(...)
+				require("lazy").load({ plugins = { "dressing.nvim" } })
+				return vim.ui.select(...)
+			end
+			---@diagnostic disable-next-line: duplicate-set-field
+			vim.ui.input = function(...)
+				require("lazy").load({ plugins = { "dressing.nvim" } })
+				return vim.ui.input(...)
+			end
+		end,
+	},
+  -- for resize screen
+	{
+		"mrjones2014/smart-splits.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("custom.configs.smartsplit")
+		end,
+	},
+  -- for winbar icon
+	{
+		"SmiteshP/nvim-navic",
+		dependencies = "neovim/nvim-lspconfig",
+		event = "BufRead",
+		config = function()
+			require("custom.configs.breadcrumb")
+			require("custom.configs.winbar")
+		end,
+	},
 }
 
 return plugins
