@@ -72,3 +72,12 @@ sudo tar xf lazygit.tar.gz -C /usr/local/bin lazygit
 lazygit --version
 ```
 
+## Config
+- Rename Config Original
+```
+mv ~/.config/nvim/lua/custom/ ~/.config/nvim/lua/custom_backup
+```
+- Clone Config Baru
+```
+git clone https://github.com/pojokcodeid/NvChad-v2-config ~/.config/nvim/lua/custom
+```
