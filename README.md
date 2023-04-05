@@ -75,7 +75,7 @@ sudo tar xf lazygit.tar.gz -C /usr/local/bin lazygit
 lazygit --version
 ```
 
-## Config
+## Config Linux / MAC
 - Rename Config Original
 ```
 mv ~/.config/nvim/lua/custom/ ~/.config/nvim/lua/custom_backup
