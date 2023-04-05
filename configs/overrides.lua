@@ -32,7 +32,7 @@ M.mason = {
     "html-lsp",
     "typescript-language-server",
     "deno",
-    "prettier"
+    "prettier",
   },
 }
 
@@ -53,3 +53,5 @@ M.nvimtree = {
 }
 
 return M
+
+

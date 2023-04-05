@@ -38,7 +38,7 @@ if mason_ok then
 end
 
 local run = 0
-local ok, frmt = pcall(require, "core.config")
+local ok, frmt = pcall(require, "custom.chadrc")
 if not ok then
 	run = 1
 end

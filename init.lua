@@ -16,6 +16,8 @@ autocmd("VimEnter", {
 local opt = vim.opt
 opt.cmdheight = 0
 
+require("custom.configs.format_onsave")
+
 -- autocmd("VimEnter",{
 --   pattern="*",
 --   command="Nvdash",
