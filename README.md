@@ -1,4 +1,7 @@
 # NvChad-v2-config
+## Dashboard
+
+![home!](img/home.png)
 ## Install Semua Kebutuhan Dasar
 1. Install Neovim 8.0+ https://github.com/neovim/neovim/releases/tag/v0.8.1
 2. C++ (windows) Compiler https://www.msys2.org/
