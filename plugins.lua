@@ -68,11 +68,11 @@ local plugins = {
       require "custom.configs.lualine"
     end,
   },
-  { "hrsh7th/cmp-nvim-lsp",     event = "BufRead" },
-  { "hrsh7th/cmp-buffer",       event = "BufRead" },
-  { "hrsh7th/cmp-path",         event = "BufRead" },
+  { "hrsh7th/cmp-nvim-lsp", event = "BufRead" },
+  { "hrsh7th/cmp-buffer", event = "BufRead" },
+  { "hrsh7th/cmp-path", event = "BufRead" },
   { "saadparwaiz1/cmp_luasnip", event = "BufRead" },
-  { "hrsh7th/cmp-nvim-lua",     event = "BufRead" },
+  { "hrsh7th/cmp-nvim-lua", event = "BufRead" },
   {
     "hrsh7th/nvim-cmp",
     version = false, -- last release is way too old
@@ -169,7 +169,7 @@ local plugins = {
     build = "npm install -g live-server",
   },
   -- for multi cursor select
-  { "mg979/vim-visual-multi",          event = "BufRead" },
+  { "mg979/vim-visual-multi", event = "BufRead" },
   -- for auto close tag
   {
     "windwp/nvim-ts-autotag",
@@ -254,6 +254,25 @@ local plugins = {
     config = function()
       require "custom.configs.breadcrumb"
       require "custom.configs.winbar"
+    end,
+  },
+  -- for debug
+  {
+    "rcarriga/nvim-dap-ui",
+    event = "BufWinEnter",
+    dependencies = "mfussenegger/nvim-dap",
+    enabled = vim.fn.has "win32" == 0,
+    config = function()
+      require "custom.configs.dapui"
+    end,
+  },
+  {
+    "jayp0521/mason-nvim-dap.nvim",
+    event = "VeryLazy",
+    dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
+    enabled = vim.fn.has "win32" == 0,
+    init = function()
+      require "custom.configs.mason_dap"
     end,
   },
 }
