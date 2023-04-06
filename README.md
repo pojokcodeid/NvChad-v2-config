@@ -87,7 +87,7 @@ git clone https://github.com/pojokcodeid/NvChad-v2-config ~/.config/nvim/lua/cus
 ## Config Windows
 - Rename Config Original
 ```
-Rename-Item "$env:LOCALAPPDATA\nvim\lua\custom custom_backup"
+Rename-Item "$env:LOCALAPPDATA\nvim\lua\custom" "$env:LOCALAPPDATA\nvim\lua\custom_backup"
 ```
 - Clone Config Baru
 ```
