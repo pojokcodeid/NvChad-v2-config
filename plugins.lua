@@ -1,5 +1,130 @@
 local overrides = require "custom.configs.overrides"
-
+-- initial active plugins optional
+local active_debug = false
+local active_visualmulti = false
+local active_lspinstaller = false
+local active_smartsplit = false
+local active_coderunner = true
+local active_liveserver = true
+local active_dressing = true
+local active_winbar = true
+-- default variable
+local debug = {}
+local liveserver = {}
+local visualmulti = {}
+local coderunner = {}
+local lspinstaller = {}
+local smartsplit = {}
+local dressing = {}
+local winbar = {}
+-- activation
+-- for winbar
+if active_winbar then
+  winbar = {
+    {
+      "SmiteshP/nvim-navic",
+      dependencies = "neovim/nvim-lspconfig",
+      event = "BufRead",
+      config = function()
+        require "custom.configs.breadcrumb"
+        require "custom.configs.winbar"
+      end,
+    },
+  }
+end
+-- for dressing
+if active_dressing then
+  dressing = {
+    {
+      "stevearc/dressing.nvim",
+      lazy = true,
+      init = function()
+        ---@diagnostic disable-next-line: duplicate-set-field
+        vim.ui.select = function(...)
+          require("lazy").load { plugins = { "dressing.nvim" } }
+          return vim.ui.select(...)
+        end
+        ---@diagnostic disable-next-line: duplicate-set-field
+        vim.ui.input = function(...)
+          require("lazy").load { plugins = { "dressing.nvim" } }
+          return vim.ui.input(...)
+        end
+      end,
+    },
+  }
+end
+-- for smart split
+if active_smartsplit then
+  smartsplit = {
+    {
+      "mrjones2014/smart-splits.nvim",
+      event = "VeryLazy",
+      config = function()
+        require "custom.configs.smartsplit"
+      end,
+    },
+  }
+end
+-- for lspinstaller
+if active_lspinstaller then
+  lspinstaller = {
+    { "williamboman/nvim-lsp-installer", event = "VeryLazy", lazy = true },
+  }
+end
+-- for coderunner
+if active_coderunner then
+  coderunner = {
+    {
+      "CRAG666/code_runner.nvim",
+      event = "BufRead",
+      -- dependencies = "nvim-lua/plenary.nvim",
+      cmd = { "RunCode", "RunFile", "RunProject", "RunClose" },
+      config = function()
+        require "custom.configs.coderunner"
+      end,
+    },
+  }
+end
+-- for visualmulti
+if active_visualmulti then
+  visualmulti = {
+    { "mg979/vim-visual-multi", event = "BufRead" },
+  }
+end
+-- for liveserver
+if active_liveserver then
+  liveserver = {
+    {
+      "manzeloth/live-server",
+      cmd = { "LiveServer" },
+      event = "BufRead",
+      build = "npm install -g live-server",
+    },
+  }
+end
+-- for debuging
+if active_debug then
+  debug = {
+    {
+      "rcarriga/nvim-dap-ui",
+      event = "BufRead",
+      dependencies = "mfussenegger/nvim-dap",
+      enabled = vim.fn.has "win32" == 0,
+      config = function()
+        require "custom.configs.dapui"
+      end,
+    },
+    {
+      "jayp0521/mason-nvim-dap.nvim",
+      event = "BufRead",
+      dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
+      enabled = vim.fn.has "win32" == 0,
+      init = function()
+        require "custom.configs.mason_dap"
+      end,
+    },
+  }
+end
 ---@type NvPluginSpec[]
 local plugins = {
 
@@ -161,15 +286,6 @@ local plugins = {
       }
     end,
   },
-  -- for live server html,css,js
-  {
-    "manzeloth/live-server",
-    cmd = { "LiveServer" },
-    event = "BufRead",
-    build = "npm install -g live-server",
-  },
-  -- for multi cursor select
-  { "mg979/vim-visual-multi", event = "BufRead" },
   -- for auto close tag
   {
     "windwp/nvim-ts-autotag",
@@ -177,16 +293,6 @@ local plugins = {
     dependencies = "nvim-treesitter/nvim-treesitter",
     config = function()
       require("nvim-ts-autotag").setup()
-    end,
-  },
-  -- for auto detection file and run code
-  {
-    "CRAG666/code_runner.nvim",
-    event = "BufRead",
-    -- dependencies = "nvim-lua/plenary.nvim",
-    cmd = { "RunCode", "RunFile", "RunProject", "RunClose" },
-    config = function()
-      require "custom.configs.coderunner"
     end,
   },
   -- key mapping
@@ -198,9 +304,6 @@ local plugins = {
       require "custom.configs.whichkey"
     end,
   },
-  -- override lsp
-  -- for install lsp tidak support mason
-  { "williamboman/nvim-lsp-installer", event = "VeryLazy", lazy = true },
   {
     "neovim/nvim-lspconfig",
     event = "VeryLazy",
@@ -221,60 +324,23 @@ local plugins = {
       require "custom.configs.mason-null-ls"
     end,
   },
+  -- for live server html,css,js
+  liveserver,
+  -- for multi cursor select
+  visualmulti,
+  -- for auto detection file and run code
+  coderunner,
+  -- override lsp
+  -- for install lsp tidak support mason
+  lspinstaller,
   -- for popup input
-  {
-    "stevearc/dressing.nvim",
-    lazy = true,
-    init = function()
-      ---@diagnostic disable-next-line: duplicate-set-field
-      vim.ui.select = function(...)
-        require("lazy").load { plugins = { "dressing.nvim" } }
-        return vim.ui.select(...)
-      end
-      ---@diagnostic disable-next-line: duplicate-set-field
-      vim.ui.input = function(...)
-        require("lazy").load { plugins = { "dressing.nvim" } }
-        return vim.ui.input(...)
-      end
-    end,
-  },
-  -- for resize screen
-  {
-    "mrjones2014/smart-splits.nvim",
-    event = "VeryLazy",
-    config = function()
-      require "custom.configs.smartsplit"
-    end,
-  },
+  dressing,
+  -- for resize split (CTRL + arrow)
+  smartsplit,
   -- for winbar icon
-  {
-    "SmiteshP/nvim-navic",
-    dependencies = "neovim/nvim-lspconfig",
-    event = "BufRead",
-    config = function()
-      require "custom.configs.breadcrumb"
-      require "custom.configs.winbar"
-    end,
-  },
-  -- for debug
-  {
-    "rcarriga/nvim-dap-ui",
-    event = "BufWinEnter",
-    dependencies = "mfussenegger/nvim-dap",
-    enabled = vim.fn.has "win32" == 0,
-    config = function()
-      require "custom.configs.dapui"
-    end,
-  },
-  {
-    "jayp0521/mason-nvim-dap.nvim",
-    event = "VeryLazy",
-    dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
-    enabled = vim.fn.has "win32" == 0,
-    init = function()
-      require "custom.configs.mason_dap"
-    end,
-  },
+  winbar,
+  -- for debuging
+  debug,
 }
 
 return plugins
