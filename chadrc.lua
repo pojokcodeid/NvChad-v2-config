@@ -1,5 +1,5 @@
 ---@type ChadrcConfig
-local M = {                          }
+local M = {}
 
 -- Path to overriding theme and highlights files
 local highlights = require "custom.highlights"
@@ -12,6 +12,7 @@ M.ui = {
   nvdash = {
     load_on_startup = true,
   },
+  transparency = false,
 }
 
 M.plugins = "custom.plugins"
