@@ -4,9 +4,9 @@ local active_debug = false
 local active_visualmulti = false
 local active_lspinstaller = false
 local active_smartsplit = false
+local active_liveserver = false
+local active_dressing = false
 local active_coderunner = true
-local active_liveserver = true
-local active_dressing = true
 local active_winbar = true
 -- default variable
 local debug = {}
