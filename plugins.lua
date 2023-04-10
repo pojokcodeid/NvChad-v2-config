@@ -251,7 +251,7 @@ if active_debug then
       end,
     },
     {
-      "jayp0521/mason-nvim-dap.nvim",
+      "jay-babu/mason-nvim-dap.nvim",
       event = "BufRead",
       dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
       enabled = vim.fn.has "win32" == 0,
