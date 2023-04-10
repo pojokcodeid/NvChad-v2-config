@@ -1,6 +1,6 @@
 local overrides = require "custom.configs.overrides"
 -- initial active plugins optional
-local active_debug = true
+local active_debug = false
 local active_toggleterm = false
 local active_visualmulti = false
 local active_lspinstaller = false
