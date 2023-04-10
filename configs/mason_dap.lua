@@ -10,4 +10,4 @@ require("mason-nvim-dap").setup {
   ensure_installed = sources,
   automatic_setup = true,
 }
-require("mason-nvim-dap").setup_handlers {}
+-- require("mason-nvim-dap").setup_handlers {}
