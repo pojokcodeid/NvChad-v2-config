@@ -1,6 +1,7 @@
 local overrides = require "custom.configs.overrides"
 -- initial active plugins optional
-local active_debug = false
+local active_debug = true
+local active_toggleterm = false
 local active_visualmulti = false
 local active_lspinstaller = false
 local active_smartsplit = false
@@ -19,7 +20,20 @@ local smartsplit = {}
 local dressing = {}
 local winbar = {}
 local cmdline = {}
+local toggleterm = {}
 -- activation
+if active_toggleterm then
+  toggleterm = {
+    {
+      "akinsho/toggleterm.nvim",
+      cmd = "Toggleterm",
+      event = "VeryLazy",
+      config = function()
+        require "custom.configs.toggleterm"
+      end,
+    },
+  }
+end
 if active_cmdline then
   cmdline = {
     {
@@ -479,6 +493,7 @@ local plugins = {
   debug,
   -- for cmd line popup
   cmdline,
+  toggleterm,
 }
 
 return plugins
