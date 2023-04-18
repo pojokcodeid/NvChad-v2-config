@@ -1,10 +1,10 @@
 local overrides = require "custom.configs.overrides"
 -- initial active plugins optional
-local active_debug = false
-local active_toggleterm = false
+local active_debug = true
+local active_toggleterm = true
 local active_visualmulti = false
 local active_lspinstaller = false
-local active_smartsplit = false
+local active_smartsplit = true
 local active_liveserver = false
 local active_dressing = false
 local active_cmdline = false
@@ -26,8 +26,8 @@ if active_toggleterm then
   toggleterm = {
     {
       "akinsho/toggleterm.nvim",
-      cmd = "Toggleterm",
-      event = "VeryLazy",
+      cmd = "ToggleTerm",
+      event = "BufRead",
       config = function()
         require "custom.configs.toggleterm"
       end,
@@ -208,7 +208,7 @@ if active_smartsplit then
   smartsplit = {
     {
       "mrjones2014/smart-splits.nvim",
-      event = "VeryLazy",
+      event = "BufRead",
       config = function()
         require "custom.configs.smartsplit"
       end,
@@ -269,7 +269,7 @@ if active_debug then
       event = "BufRead",
       dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
       enabled = vim.fn.has "win32" == 0,
-      init = function()
+      config = function()
         require "custom.configs.mason_dap"
       end,
     },
@@ -456,7 +456,7 @@ local plugins = {
   },
   {
     "neovim/nvim-lspconfig",
-    event = "VeryLazy",
+    event = "BufRead",
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
     },
@@ -470,7 +470,7 @@ local plugins = {
     lazy = true,
     dependencies = "jose-elias-alvarez/null-ls.nvim",
     event = "BufRead",
-    opts = function()
+    config = function()
       require "custom.configs.mason-null-ls"
     end,
   },
