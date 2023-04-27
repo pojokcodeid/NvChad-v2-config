@@ -494,6 +494,10 @@ local plugins = {
   -- for cmd line popup
   cmdline,
   toggleterm,
+  {
+    "folke/tokyonight.nvim",
+    event = "BufRead",
+  },
 }
 
 return plugins
