@@ -73,6 +73,10 @@ local location = {
   padding = 0,
 }
 
+local time = function()
+  return " " .. os.date "%R"
+end
+
 -- cool function for progress
 local progress = function()
   local current_line = vim.fn.line "."
@@ -175,14 +179,14 @@ lualine.setup {
     icons_enabled = true,
     theme = "onedark",
     --theme = "auto",
-    component_separators = { left = "", right = "" },
-    section_separators = { left = "", right = "" },
+    -- component_separators = { left = "", right = "" },
+    -- section_separators = { left = "", right = "" },
     --component_separators = { left = "", right = "" },
     --section_separators = { left = "", right = "" },
     --component_separators = { left = "│", right = "│" },
     --section_separators = { left = " ", right = " " },
-    --component_separators = { left = " ", right = " " },
-    --section_separators = { left = "", right = "" },
+    component_separators = { left = " ", right = " " },
+    section_separators = { left = "", right = "" },
     --component_separators = { left = " ", right = " " },
     --section_separators = { left = " ", right = " " },
     disabled_filetypes = {
@@ -208,7 +212,8 @@ lualine.setup {
     -- lualine_x = { "encoding", "fileformat", "filetype" },
     lualine_x = { diff, spaces, "encoding", filetype },
     lualine_y = { location },
-    lualine_z = { progress },
+    -- lualine_z = { progress },
+    lualine_z = { time },
   },
   inactive_sections = {
     lualine_a = {},
