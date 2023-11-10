@@ -35,6 +35,22 @@ function _PYTHON_TOGGLE()
   python:toggle()
 end
 
+function _NEWTAB_TOGGLE()
+  local Terminal = require("toggleterm.terminal").Terminal
+  local pwsh = Terminal:new { cmd = "pwsh", hidden = true, direction = "tab" }
+  pwsh:toggle()
+end
+
+function _LIVE_SERVER()
+  local Terminal = require("toggleterm.terminal").Terminal
+  local live_server = Terminal:new {
+    cmd = "live-server",
+    hidden = true,
+    direction = "tab",
+  }
+  live_server:toggle()
+end
+
 local setup = {
   icons = {
     breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
@@ -83,9 +99,9 @@ local opts2 = {
 }
 
 local trn = ""
-if vim.fn.has "win32" == 1 then
-  trn = "pwsh<cr>"
-end
+-- if vim.fn.has "win32" == 1 then
+--   trn = "pwsh<cr>"
+-- end
 -- for debug
 local debug_key = {}
 -- local is_dap = pcall(require, "dap")
@@ -221,13 +237,16 @@ local mappings = {
 
   t = {
     name = "Terminal",
+    l = { "<cmd>lua _LIVE_SERVER()<cr>", "Live Server" },
+    P = { "<cmd>lua _NEWTAB_TOGGLE()<cr>", "Power Shell" },
     n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
     u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
     t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
     p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
-    f = { "<cmd>ToggleTerm direction=float<cr>" .. trn, "Float" },
+    f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
     h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
-    v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>" .. trn, "Vertical" },
+    v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
+    s = { "<cmd>ToggleTerm direction=tab<cr>", "New Tab" },
   },
   r = {
     name = "Run",
@@ -238,7 +257,7 @@ local mappings = {
     r = { "<cmd>RunCode<CR>", "Run Code" },
     f = { "<cmd>RunFile<CR>", "Run File" },
     p = { "<cmd>RunProject<CR>", "Run Project" },
-    g = { "<cmd>ToggleTerm size=70 direction=float<cr>clear<cr>gradle run<cr>" .. trn, "Run Gradle" },
+    g = { "<cmd>ToggleTerm size=70 direction=float<cr>clear<cr>gradle run<cr>", "Run Gradle" },
     m = {
       "<cmd>ToggleTerm size=70 direction=float<cr>mvn exec:java -Dexec.mainClass=com.pojokcode.App<cr>",
       "Run MVN",
