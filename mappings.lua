@@ -8,19 +8,25 @@ M.general = {
 
   i = {
     ["<c-c>"] = { '"+y', " ", opts = { nowait = true } },
-    ["<c-v>"] = { "<c-r>+", " ", opts = { nowait = true }},
-    ["<S-Down>"] = { "<cmd>t.<cr>", " ", opts = { nowait = true }},
-    ["<M-Down>"] = { "<cmd>m+<cr>", " ", opts = { nowait = true }},
-    ["<S-Up>"] = { "<cmd>t -1<cr>", " ", opts = { nowait = true }},
-    ["<M-Up>"] = { "<cmd>m-2<cr>", " ", opts = { nowait = true }},
-    ["<C-s>"] = { "<cmd>w<cr>", " ", opts = { nowait = true }},
-    ["<C-l>"] = { "<cmd>LiveServer start<cr><cr>", " ", opts = { nowait = true }},
+    ["<c-v>"] = { "<c-r>+", " ", opts = { nowait = true } },
+    ["<S-Down>"] = { "<cmd>t.<cr>", " ", opts = { nowait = true } },
+    ["<M-Down>"] = { "<cmd>m+<cr>", " ", opts = { nowait = true } },
+    ["<S-Up>"] = { "<cmd>t -1<cr>", " ", opts = { nowait = true } },
+    ["<M-Up>"] = { "<cmd>m-2<cr>", " ", opts = { nowait = true } },
+    ["<C-s>"] = { "<cmd>w<cr>", " ", opts = { nowait = true } },
+    ["<C-l>"] = { "<cmd>LiveServer start<cr><cr>", " ", opts = { nowait = true } },
     ["<C-f>"] = { "<cmd>lua vim.lsp.buf.format{async=true}<cr>", " ", opts = { nowait = true } },
+    ["<C-_>"] = {
+      "<esc><cmd>lua require('Comment.api').toggle.linewise.current()<cr>$i<Right><leader>",
+      " ",
+      opts = { nowait = true },
+    },
   },
   v = {
     ["<C-]>"] = {
       "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
-      " ", opts = { nowait = true },
+      " ",
+      opts = { nowait = true },
     },
     ["<A-j>"] = { ":m .+1<CR>==", " ", opts = { nowait = true } },
     ["<A-k>"] = { ":m .-2<CR>==", " ", opts = { nowait = true } },
@@ -34,11 +40,22 @@ M.general = {
     -- ["<A-k>"] = { ":move '<-2<CR>gv-gv", " ", opts = { nowait = true } },
     ["<A-Up>"] = { ":move '<-2<CR>gv-gv", " ", opts = { nowait = true } },
     ["<S-Down>"] = { ":'<,'>t'><cr>", " ", opts = { nowait = true } },
+    ["<C-_>"] = {
+      "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
+      " ",
+      opts = { nowait = true },
+    },
   },
   n = {
     -- second key is the lefthand side of the map
     -- mappings seen under group name "Buffer"
-    ["<C-]>"] = { function() require("Comment.api").toggle.linewise.current() end, " ", opts = { nowait = true } },
+    ["<C-]>"] = {
+      function()
+        require("Comment.api").toggle.linewise.current()
+      end,
+      " ",
+      opts = { nowait = true },
+    },
     ["<c-c>"] = { '"+y', " ", opts = { nowait = true } },
     ["<c-v>"] = { '"+p', " ", opts = { nowait = true } },
     ["<S-Down>"] = { "<cmd>t.<cr>", " ", opts = { nowait = true } },
@@ -55,16 +72,22 @@ M.general = {
     ["<leader>bc"] = { "<cmd>BufferLinePickClose<cr>", " ", opts = { nowait = true } },
     ["<leader>bj"] = { "<cmd>BufferLinePick<cr>", " ", opts = { nowait = true } },
     ["<leader>bt"] = { "<cmd>BufferLineSortByTabs<cr>", " ", opts = { nowait = true } },
+    ["<C-_>"] = {
+      "<esc><cmd>lua require('Comment.api').toggle.linewise.current()<cr>$i<Right><leader>",
+      " ",
+      opts = { nowait = true },
+    },
+    ["<A-l>"] = { "<cmd>terminal<cr>$i<Right>live-server<cr>", " ", opts = { nowait = true } },
     -- quick save
     -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
   },
 }
 -- custom which key disini
-M.whichkey={
+M.whichkey = {
   n = {
     ["<leader>o"] = { "<cmd> NvimTreeFocus <CR>", "Testing Mapping" },
     -- ["<leader>r"] = { name = "+Run" },
-  }
+  },
 }
 
 -- more keybinds!
