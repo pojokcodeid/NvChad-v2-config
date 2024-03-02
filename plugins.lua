@@ -279,13 +279,16 @@ end
 local plugins = {
 
   -- Override plugin definition options
-
+  { "jose-elias-alvarez/null-ls.nvim", enabled = true },
   {
     "neovim/nvim-lspconfig",
     dependencies = {
       -- format & linting
       {
-        "jose-elias-alvarez/null-ls.nvim",
+        "nvimtools/none-ls.nvim",
+        dependencies = {
+          "nvimtools/none-ls-extras.nvim",
+        },
         config = function()
           require "custom.configs.null-ls"
         end,
