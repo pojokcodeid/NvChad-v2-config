@@ -2,7 +2,7 @@ return {
   {
     "stevearc/conform.nvim",
     -- event = 'BufWritePre' -- uncomment for format on save
-    enabble = false,
+    enabled = false,
     config = function()
       require "configs.conform"
     end,
@@ -62,7 +62,7 @@ return {
         lazy = true,
       },
       config = function()
-        require "configs.user.lsp.null-ls"
+        require "configs.user.null-ls"
       end,
     },
     event = "InsertEnter",
@@ -176,6 +176,14 @@ return {
     dependencies = "nvim-treesitter/nvim-treesitter",
     config = function()
       require("nvim-ts-autotag").setup()
+    end,
+  },
+  {
+    "akinsho/toggleterm.nvim",
+    cmd = "ToggleTerm",
+    event = "BufRead",
+    config = function()
+      require "configs.user.toggleterm"
     end,
   },
 }

@@ -1,5 +1,11 @@
 require "nvchad.mappings"
 
+function _LAZYGIT_TOGGLE()
+  local Terminal = require("toggleterm.terminal").Terminal
+  local lazygit = Terminal:new { cmd = "lazygit", hidden = true }
+  lazygit:toggle()
+end
+
 -- add yours here
 
 local map = vim.keymap.set
@@ -31,5 +37,8 @@ map("i", "<M-Down>", "<cmd>m+<cr>")
 map("n", "<M-Up>", "<cmd>m-2<cr>")
 map("i", "<M-Up>", "<cmd>m-2<cr>")
 map("x", "<S-Down>", ":'<,'>t'><cr>")
+
+-- load lazygit
+map("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { desc = "Lazygit" })
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
