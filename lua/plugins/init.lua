@@ -164,15 +164,6 @@ return {
     end,
   },
   {
-    "SmiteshP/nvim-navic",
-    dependencies = "neovim/nvim-lspconfig",
-    event = "BufRead",
-    config = function()
-      require "configs.user.breadcrumb"
-      require "configs.user.winbar"
-    end,
-  },
-  {
     "mrjones2014/smart-splits.nvim",
     event = "BufRead",
     config = function()
