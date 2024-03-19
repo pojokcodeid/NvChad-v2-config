@@ -1,39 +1,39 @@
-local autocmd = vim.api.nvim_create_autocmd
+vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
+vim.g.mapleader = " "
 
--- Auto resize panes when resizing nvim window
-autocmd("VimResized", {
-  pattern = "*",
-  command = "tabdo wincmd =",
-})
+-- bootstrap lazy and all plugins
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
-autocmd("VimEnter", {
-  pattern = "*",
-  callback = function()
-    vim.opt.statusline = "%#normal# "
-  end,
-})
+if not vim.loop.fs_stat(lazypath) then
+  local repo = "https://github.com/folke/lazy.nvim.git"
+  vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
+end
 
-local opt = vim.opt
-opt.cmdheight = 0
+vim.opt.rtp:prepend(lazypath)
 
-require "custom.configs.format_onsave"
+local lazy_config = require "configs.lazy"
 
-local lpath = vim.fn.stdpath "config" .. "/lua/custom/my-snippets"
-vim.g.vscode_snippets_path = lpath
-vim.g.snipmate_snippets_path = lpath
+-- load plugins
+require("lazy").setup({
+  {
+    "NvChad/NvChad",
+    lazy = false,
+    branch = "v2.5",
+    import = "nvchad.plugins",
+    config = function()
+      require "options"
+    end,
+  },
 
--- autocmd("VimEnter",{
---   pattern="*",
---   command="Nvdash",
--- })
+  { import = "plugins" },
+}, lazy_config)
 
--- autocmd("WinEnter", {
---    pattern = "*",
---    callback = function()
---       if vim.bo.buftype ~= "terminal" then
---          vim.opt.statusline = "%!v:lua.require'ui.statusline'.run()"
---       else
---          vim.opt.statusline = "%#normal# "
---       end
---    end,
--- })
+-- load theme
+dofile(vim.g.base46_cache .. "defaults")
+dofile(vim.g.base46_cache .. "statusline")
+
+require "nvchad.autocmds"
+
+vim.schedule(function()
+  require "mappings"
+end)
