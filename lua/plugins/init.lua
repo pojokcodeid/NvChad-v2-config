@@ -62,7 +62,7 @@ return {
         lazy = true,
       },
       config = function()
-        require "configs.user.null-ls"
+        require "configs.user.null_ls"
       end,
     },
     event = "InsertEnter",
