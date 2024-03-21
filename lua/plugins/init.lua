@@ -93,4 +93,9 @@ return {
       require "configs.user.toggleterm"
     end,
   },
+  {
+    "famiu/bufdelete.nvim",
+    lazy = true,
+    event = "InsertEnter",
+  },
 }
