@@ -1,4 +1,11 @@
 require "nvchad.mappings"
+function _NEXT_BUF()
+  require("nvchad.tabufline").next()
+end
+
+function _PREV_BUF()
+  require("nvchad.tabufline").prev()
+end
 
 local map = vim.keymap.set
 
@@ -29,6 +36,13 @@ map("i", "<M-Down>", "<cmd>m+<cr>")
 map("n", "<M-Up>", "<cmd>m-2<cr>")
 map("i", "<M-Up>", "<cmd>m-2<cr>")
 map("x", "<S-Down>", ":'<,'>t'><cr>")
+
+-- save insert mode
+map("i", "<C-s>", "<esc><cmd>w<cr>i")
+
+-- navigate tabufline left and right
+map("n", "<S-h>", "<cmd>lua _PREV_BUF()<cr>")
+map("n", "<S-l>", "<cmd>lua _NEXT_BUF()<cr>")
 
 -- load lazygit
 map("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { desc = "Lazygit" })

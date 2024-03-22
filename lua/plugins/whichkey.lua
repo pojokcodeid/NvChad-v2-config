@@ -18,7 +18,7 @@ return {
         --     require("bufdelete").bufdelete(buf, true)
         --   end
         -- end
-        require("configs.user.bufferline").closeOtherBufs()
+        require("nvchad.tabufline").closeOtherBufs()
       end
 
       function _CLOSE_BUF_LEFT()
@@ -29,7 +29,7 @@ return {
         --   end
         --   require("bufdelete").bufdelete(bufnr, true)
         -- end
-        require("configs.user.bufferline").closeBufs_at_direction "left"
+        require("nvchad.tabufline").closeBufs_at_direction "left"
       end
 
       function _CLOSE_BUF_RIGHT()
@@ -43,7 +43,7 @@ return {
         --     after_current = true
         --   end
         -- end
-        require("configs.user.bufferline").closeBufs_at_direction "right"
+        require("nvchad.tabufline").closeBufs_at_direction "right"
       end
 
       dofile(vim.g.base46_cache .. "whichkey")
@@ -100,7 +100,7 @@ return {
         b = {
           name = "Buffers",
           b = { "<cmd>enew<CR>", "Buffer New" },
-          c = { "<cmd>lua  require('configs.user.bufferline').close_buffer()<cr>", "Close current buffer" },
+          c = { "<cmd>lua  require('nvchad.tabufline').close_buffer()<cr>", "Close current buffer" },
           d = { "<cmd>lua _CLOSE_ALL_BUFFER()<cr>", "Close All Buffers" },
           k = { "<cmd>lua _CLOSE_BUF_LEFT()<cr>", "Delete Buffer Left" },
           K = { "<cmd>lua _CLOSE_BUF_RIGHT()<cr>", "Delete Buffer Right" },
