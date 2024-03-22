@@ -12,35 +12,38 @@ return {
 
       -- function for close all bufferline
       function _CLOSE_ALL_BUFFER()
-        local buf_active = vim.api.nvim_get_current_buf()
-        for _, buf in ipairs(vim.t.bufs) do
-          if buf ~= buf_active then
-            require("bufdelete").bufdelete(buf, true)
-          end
-        end
+        -- local buf_active = vim.api.nvim_get_current_buf()
+        -- for _, buf in ipairs(vim.t.bufs) do
+        --   if buf ~= buf_active then
+        --     require("bufdelete").bufdelete(buf, true)
+        --   end
+        -- end
+        require("configs.user.bufferline").closeOtherBufs()
       end
 
       function _CLOSE_BUF_LEFT()
-        local current = vim.api.nvim_get_current_buf()
-        for _, bufnr in ipairs(vim.t.bufs) do
-          if bufnr == current then
-            break
-          end
-          require("bufdelete").bufdelete(bufnr, true)
-        end
+        -- local current = vim.api.nvim_get_current_buf()
+        -- for _, bufnr in ipairs(vim.t.bufs) do
+        --   if bufnr == current then
+        --     break
+        --   end
+        --   require("bufdelete").bufdelete(bufnr, true)
+        -- end
+        require("configs.user.bufferline").closeBufs_at_direction "left"
       end
 
       function _CLOSE_BUF_RIGHT()
-        local current = vim.api.nvim_get_current_buf()
-        local after_current = false
-        for _, bufnr in ipairs(vim.t.bufs) do
-          if after_current then
-            require("bufdelete").bufdelete(bufnr, true)
-          end
-          if bufnr == current then
-            after_current = true
-          end
-        end
+        -- local current = vim.api.nvim_get_current_buf()
+        -- local after_current = false
+        -- for _, bufnr in ipairs(vim.t.bufs) do
+        --   if after_current then
+        --     require("bufdelete").bufdelete(bufnr, true)
+        --   end
+        --   if bufnr == current then
+        --     after_current = true
+        --   end
+        -- end
+        require("configs.user.bufferline").closeBufs_at_direction "right"
       end
 
       dofile(vim.g.base46_cache .. "whichkey")
@@ -97,7 +100,7 @@ return {
         b = {
           name = "Buffers",
           b = { "<cmd>enew<CR>", "Buffer New" },
-          c = { "<cmd>lua require('bufdelete').bufdelete(0, true)<cr>", "Close current buffer" },
+          c = { "<cmd>lua  require('configs.user.bufferline').close_buffer()<cr>", "Close current buffer" },
           d = { "<cmd>lua _CLOSE_ALL_BUFFER()<cr>", "Close All Buffers" },
           k = { "<cmd>lua _CLOSE_BUF_LEFT()<cr>", "Delete Buffer Left" },
           K = { "<cmd>lua _CLOSE_BUF_RIGHT()<cr>", "Delete Buffer Right" },
